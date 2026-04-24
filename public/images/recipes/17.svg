@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="100%" height="100%" fill="#FFF7ED" />
+  <g fill="#7C2D12" font-family="Georgia, serif">
+    <text x="50%" y="45%" font-size="64" font-weight="700" text-anchor="middle">Salted Caramel</text>
+    <text x="50%" y="55%" font-size="48" text-anchor="middle">Panna Cotta</text>
+  </g>
+  <ellipse cx="1000" cy="680" rx="160" ry="60" fill="#A16207" opacity="0.08"/>
+</svg>

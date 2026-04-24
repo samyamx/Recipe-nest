@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-04-24T08:51:33.765Z",
+  "mappings": [
+    {
+      "from": "Pasta",
+      "to": "Pasta",
+      "count": 2
+    },
+    {
+      "from": "Seafood",
+      "to": "Seafood",
+      "count": 2
+    },
+    {
+      "from": "Dessert",
+      "to": "Dessert",
+      "count": 2
+    },
+    {
+      "from": "Pizza",
+      "to": "Pizza",
+      "count": 1
+    },
+    {
+      "from": "Breakfast",
+      "to": "Breakfast",
+      "count": 1
+    },
+    {
+      "from": "Salad",
+      "to": "Salad",
+      "count": 1
+    },
+    {
+      "from": "Bread",
+      "to": "Bread",
+      "count": 1
+    },
+    {
+      "from": "Vegan",
+      "to": "Vegan",
+      "count": 1
+    }
+  ]
+}

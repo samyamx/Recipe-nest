@@ -1,0 +1,151 @@
+[
+  {
+    "id": "14",
+    "title": "Lemon Garlic Shrimp Linguine",
+    "description": "Quick and bright shrimp pasta with garlic, lemon, and parsley — perfect for weeknights.",
+    "image": "/images/recipe-14.jpg",
+    "category": "Pasta",
+    "cookTime": "25 min",
+    "servings": 2,
+    "difficulty": "Easy",
+    "rating": 4.7,
+    "reviews": 64,
+    "author": "Chef Luca",
+    "authorAvatar": "",
+    "bookmarked": false,
+    "ingredients": [
+      "200g linguine",
+      "200g shrimp, peeled",
+      "3 cloves garlic, minced",
+      "2 tbsp olive oil",
+      "1 lemon, zested and juiced",
+      "2 tbsp chopped parsley",
+      "Salt and pepper"
+    ],
+    "steps": [
+      "Cook linguine until al dente and reserve 1/2 cup pasta water.",
+      "Sauté garlic in olive oil until fragrant, add shrimp and cook until pink.",
+      "Add lemon zest, juice, and a splash of pasta water. Toss with linguine and parsley.",
+      "Season and serve immediately."
+    ],
+    "createdAt": "2026-04-15"
+  },
+  {
+    "id": "15",
+    "title": "Mediterranean Chickpea Salad",
+    "description": "A refreshing salad with chickpeas, cucumber, cherry tomatoes, olives, and a lemon-oregano dressing.",
+    "image": "/images/recipe-15.jpg",
+    "category": "Salad",
+    "cookTime": "15 min",
+    "servings": 4,
+    "difficulty": "Easy",
+    "rating": 4.5,
+    "reviews": 34,
+    "author": "Olivia Greens",
+    "authorAvatar": "",
+    "bookmarked": false,
+    "ingredients": [
+      "2 cans chickpeas, drained",
+      "1 cucumber, diced",
+      "1 cup cherry tomatoes, halved",
+      "1/2 cup Kalamata olives, sliced",
+      "1/4 cup red onion, thinly sliced",
+      "2 tbsp olive oil",
+      "Juice of 1 lemon",
+      "1 tsp dried oregano",
+      "Salt and pepper"
+    ],
+    "steps": [
+      "Combine chickpeas, cucumber, tomatoes, olives, and red onion in a bowl.",
+      "Whisk olive oil, lemon juice, oregano, salt, and pepper. Pour over salad and toss.",
+      "Chill briefly and serve."
+    ],
+    "createdAt": "2026-04-16"
+  },
+  {
+    "id": "16",
+    "title": "Coconut Lime Vegan Tacos",
+    "description": "Flavorful jackfruit tacos with coconut-lime slaw and a spicy crema — plant-based and delicious.",
+    "image": "/images/recipe-16.jpg",
+    "category": "Vegan",
+    "cookTime": "35 min",
+    "servings": 6,
+    "difficulty": "Medium",
+    "rating": 4.6,
+    "reviews": 21,
+    "author": "Green Kitchen",
+    "authorAvatar": "",
+    "bookmarked": false,
+    "ingredients": [
+      "2 cans young jackfruit, drained",
+      "1 can coconut milk",
+      "1 tbsp curry powder",
+      "8 small tortillas",
+      "1/2 small cabbage, shredded",
+      "Juice of 1 lime",
+      "Salt and chili flakes"
+    ],
+    "steps": [
+      "Simmer jackfruit with coconut milk and curry powder until tender and shredded.",
+      "Mix cabbage with lime juice and a pinch of salt for the slaw.",
+      "Assemble tacos with jackfruit and slaw. Serve with extra lime."
+    ],
+    "createdAt": "2026-04-17"
+  },
+  {
+    "id": "17",
+    "title": "Salted Caramel Panna Cotta",
+    "description": "Silky panna cotta topped with a buttery salted caramel sauce.",
+    "image": "/images/recipe-17.jpg",
+    "category": "Dessert",
+    "cookTime": "4 hrs",
+    "servings": 4,
+    "difficulty": "Medium",
+    "rating": 4.9,
+    "reviews": 48,
+    "author": "Pastry Chef Lina",
+    "authorAvatar": "",
+    "bookmarked": false,
+    "ingredients": [
+      "2 cups heavy cream",
+      "1/2 cup sugar",
+      "1 tsp vanilla",
+      "2 tsp gelatin",
+      "Salted caramel sauce"
+    ],
+    "steps": [
+      "Bloom gelatin in a little cold water.",
+      "Heat cream, sugar, and vanilla until sugar dissolves. Whisk in gelatin.",
+      "Pour into molds and chill until set. Top with salted caramel."
+    ],
+    "createdAt": "2026-04-18"
+  },
+  {
+    "id": "18",
+    "title": "Smoky Grilled Mackerel",
+    "description": "Simple grilled mackerel with a smoky char and lemon-herb finish.",
+    "image": "/images/recipe-18.jpg",
+    "category": "Seafood",
+    "cookTime": "20 min",
+    "servings": 2,
+    "difficulty": "Easy",
+    "rating": 4.6,
+    "reviews": 26,
+    "author": "Fisher Sam",
+    "authorAvatar": "",
+    "bookmarked": false,
+    "ingredients": [
+      "2 whole mackerel, cleaned",
+      "2 tbsp olive oil",
+      "1 lemon",
+      "Fresh dill",
+      "Salt and pepper"
+    ],
+    "steps": [
+      "Score the fish and rub with oil, salt, and pepper.",
+      "Grill on high heat for 4-5 minutes per side until charred and cooked.",
+      "Serve with lemon and fresh dill."
+    ],
+    "createdAt": "2026-04-19"
+  }
+]
