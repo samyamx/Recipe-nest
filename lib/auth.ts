@@ -2,11 +2,8 @@ import "server-only"
 
 import crypto from "crypto"
 import { cookies } from "next/headers"
-<<<<<<< HEAD
-import { getDatabase, getDatabaseSafely } from "@/lib/mongodb"
-=======
-import { getDatabase } from "@/lib/mongodb"
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
+import { dashboardStats, recentUsers } from "@/lib/data"
+import { getDatabaseSafely } from "@/lib/mongodb"
 
 const usersCollectionName = "users"
 const sessionsCollectionName = "sessions"
@@ -19,11 +16,7 @@ export type AppUser = {
   id: string
   location?: string
   name: string
-<<<<<<< HEAD
-  role: "Admin" | "Chef"
-=======
   role: "Admin" | "Chef" | "User"
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   status: "Active" | "Inactive"
 }
 
@@ -75,7 +68,6 @@ function sanitizeUser(user: UserDocument): AppUser {
 }
 
 async function getUsersCollection() {
-<<<<<<< HEAD
   const db = await getDatabaseSafely()
   return db?.collection<UserDocument>(usersCollectionName) ?? null
 }
@@ -83,15 +75,22 @@ async function getUsersCollection() {
 async function getSessionsCollection() {
   const db = await getDatabaseSafely()
   return db?.collection<SessionDocument>(sessionsCollectionName) ?? null
-=======
-  const db = await getDatabase()
-  return db.collection<UserDocument>(usersCollectionName)
 }
 
-async function getSessionsCollection() {
-  const db = await getDatabase()
-  return db.collection<SessionDocument>(sessionsCollectionName)
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
+async function requireUsersCollection() {
+  const usersCollection = await getUsersCollection()
+  if (!usersCollection) {
+    throw new Error("Database is unavailable.")
+  }
+  return usersCollection
+}
+
+async function requireSessionsCollection() {
+  const sessionsCollection = await getSessionsCollection()
+  if (!sessionsCollection) {
+    throw new Error("Database is unavailable.")
+  }
+  return sessionsCollection
 }
 
 async function setSessionCookie(token: string, expiresAt: Date) {
@@ -110,16 +109,8 @@ export async function clearSessionCookie() {
   cookieStore.delete(sessionCookieName)
 }
 
-<<<<<<< HEAD
 export async function signUpUser(input: { email: string; name: string; password: string; role?: AppUser["role"] }) {
-  const usersCollection = await getUsersCollection()
-  if (!usersCollection) {
-    throw new Error("Database is unavailable.")
-  }
-=======
-export async function signUpUser(input: { email: string; name: string; password: string }) {
-  const usersCollection = await getUsersCollection()
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
+  const usersCollection = await requireUsersCollection()
 
   const normalizedEmail = input.email.trim().toLowerCase()
   const existingUser = await usersCollection.findOne({ email: normalizedEmail })
@@ -128,12 +119,12 @@ export async function signUpUser(input: { email: string; name: string; password:
     throw new Error("An account with this email already exists.")
   }
 
-<<<<<<< HEAD
   const userCount = await usersCollection.countDocuments()
-  const assignedRole: AppUser["role"] = input.role === "Admin" ? "Admin" : "Chef"
+  const incomingRole = input.role ?? "User"
+  const normalizedRole: AppUser["role"] = ["Admin", "Chef", "User"].includes(incomingRole) ? incomingRole : "User"
+  const assignedRole: AppUser["role"] =
+    userCount === 0 ? "Admin" : normalizedRole === "Admin" ? "User" : normalizedRole
 
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   const user: UserDocument = {
     bio: "",
     createdAt: new Date().toISOString(),
@@ -142,11 +133,7 @@ export async function signUpUser(input: { email: string; name: string; password:
     location: "",
     name: input.name.trim(),
     passwordHash: hashPassword(input.password),
-<<<<<<< HEAD
-    role: userCount === 0 ? "Admin" : assignedRole,
-=======
-    role: "Chef",
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
+    role: assignedRole,
     status: "Active",
   }
 
@@ -154,7 +141,6 @@ export async function signUpUser(input: { email: string; name: string; password:
   return sanitizeUser(user)
 }
 
-<<<<<<< HEAD
 export async function updateUserRole(userId: string, role: AppUser["role"]) {
   const usersCollection = await getUsersCollection()
   if (!usersCollection) return null
@@ -167,11 +153,8 @@ export async function updateUserRole(userId: string, role: AppUser["role"]) {
   const updated = await usersCollection.findOne({ id: userId })
   return updated ? sanitizeUser(updated) : null
 }
-
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 export async function updateCurrentUserProfile(input: { bio: string; location: string; name: string; userId: string }) {
-  const usersCollection = await getUsersCollection()
+  const usersCollection = await requireUsersCollection()
 
   const nextName = input.name.trim()
   const nextBio = input.bio.trim()
@@ -202,7 +185,7 @@ export async function updateCurrentUserProfile(input: { bio: string; location: s
 }
 
 export async function signInUser(input: { email: string; password: string }) {
-  const usersCollection = await getUsersCollection()
+  const usersCollection = await requireUsersCollection()
 
   const normalizedEmail = input.email.trim().toLowerCase()
   const user = await usersCollection.findOne({ email: normalizedEmail })
@@ -215,7 +198,7 @@ export async function signInUser(input: { email: string; password: string }) {
 }
 
 export async function createSession(userId: string) {
-  const sessionsCollection = await getSessionsCollection()
+  const sessionsCollection = await requireSessionsCollection()
 
   const token = crypto.randomBytes(32).toString("hex")
   const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
@@ -275,7 +258,22 @@ export async function getCurrentUser() {
 
 export async function listUsersWithRecipeCounts() {
   const usersCollection = await getUsersCollection()
-  const db = await getDatabase()
+  const db = await getDatabaseSafely()
+
+  if (!usersCollection || !db) {
+    return recentUsers
+      .map((user) => ({
+        createdAt: new Date(user.joined).toISOString(),
+        email: user.email,
+        id: user.id,
+        joined: user.joined,
+        name: user.name,
+        recipes: user.recipes,
+        role: user.role as AppUser["role"],
+        status: user.status as AppUser["status"],
+      }))
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+  }
 
   const recipes = db.collection<{ author: string }>("recipes")
   const users = await usersCollection.find({}, { projection: { passwordHash: 0, _id: 0 } }).toArray()
@@ -293,17 +291,16 @@ export async function listUsersWithRecipeCounts() {
 
   return enriched.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
 }
-<<<<<<< HEAD
 
 export async function getTotalUsers() {
   const usersCollection = await getUsersCollection()
-  if (!usersCollection) return 6432 // Default fallback
+  if (!usersCollection) return dashboardStats.totalUsers
   return await usersCollection.countDocuments()
 }
 
 export async function getNewUsersThisMonth() {
   const usersCollection = await getUsersCollection()
-  if (!usersCollection) return 42 // Default fallback
+  if (!usersCollection) return dashboardStats.newUsersThisMonth
   const firstDayOfMonth = new Date()
   firstDayOfMonth.setDate(1)
   firstDayOfMonth.setHours(0, 0, 0, 0)
@@ -312,5 +309,3 @@ export async function getNewUsersThisMonth() {
     createdAt: { $gte: firstDayOfMonth.toISOString() }
   })
 }
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Plus, Pencil, Trash2, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,11 +14,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-<<<<<<< HEAD
-import { useEffect } from "react"
-=======
-import { categoryStats } from "@/lib/data"
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 import { toast } from "sonner"
 
 interface Category {
@@ -27,11 +22,7 @@ interface Category {
 }
 
 export default function CategoriesPage() {
-<<<<<<< HEAD
   const [categories, setCategories] = useState<Category[]>([])
-=======
-  const [categories, setCategories] = useState<Category[]>(categoryStats)
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   const [editDialog, setEditDialog] = useState(false)
   const [deleteDialog, setDeleteDialog] = useState(false)
   const [currentCategory, setCurrentCategory] = useState<Category | null>(null)
@@ -53,7 +44,6 @@ export default function CategoriesPage() {
   }
 
   function handleSave() {
-<<<<<<< HEAD
     if (!editName.trim()) {
       toast.error('Name is required')
       return
@@ -92,19 +82,10 @@ export default function CategoriesPage() {
           toast.error('Could not update category')
         }
       })()
-=======
-    if (isCreating) {
-      setCategories([...categories, { name: editName, count: 0 }])
-      toast.success("Category created!")
-    } else if (currentCategory) {
-      setCategories(categories.map((c) => (c.name === currentCategory.name ? { ...c, name: editName } : c)))
-      toast.success("Category updated!")
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
     }
     setEditDialog(false)
   }
 
-<<<<<<< HEAD
   useEffect(() => {
     let mounted = true
     ;(async () => {
@@ -142,13 +123,6 @@ export default function CategoriesPage() {
         toast.error('Could not delete category')
       }
     })()
-=======
-  function handleDelete() {
-    if (currentCategory) {
-      setCategories(categories.filter((c) => c.name !== currentCategory.name))
-      toast.success("Category deleted!")
-    }
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
     setDeleteDialog(false)
   }
 

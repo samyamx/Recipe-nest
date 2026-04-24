@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next'
-import { Analytics } from '@vercel/analytics/next'
-import { Toaster } from 'sonner'
-import './globals.css'
+import type { Metadata, Viewport } from "next"
+import { Analytics } from "@vercel/analytics/next"
+import { Toaster } from "sonner"
+import "./globals.css"
 
 export const metadata: Metadata = {
   title: 'Recipe Nest - Discover & Share Recipes',
@@ -38,13 +39,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-<<<<<<< HEAD
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased" suppressHydrationWarning>
-=======
-    <html lang="en">
-      <body className="font-sans antialiased">
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
         {children}
         <Toaster position="bottom-right" richColors />
         <Analytics />

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, MoreHorizontal, Trash2, Pencil, Shield } from "lucide-react"
+import { Search, MoreHorizontal, Trash2, Shield } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -21,6 +21,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { toast } from "sonner"
+import { cn } from "@/lib/utils"
 
 type PortalUser = {
   createdAt: string
@@ -29,11 +30,7 @@ type PortalUser = {
   joined: string
   name: string
   recipes: number
-<<<<<<< HEAD
-  role: "Admin" | "Chef"
-=======
   role: "Admin" | "Chef" | "User"
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   status: "Active" | "Inactive"
 }
 
@@ -41,13 +38,9 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
   const [search, setSearch] = useState("")
   const [users, setUsers] = useState(initialUsers)
   const [deleteDialog, setDeleteDialog] = useState(false)
-<<<<<<< HEAD
   const [roleDialog, setRoleDialog] = useState(false)
   const [selectedUser, setSelectedUser] = useState<PortalUser | null>(null)
   const [isUpdating, setIsUpdating] = useState(false)
-=======
-  const [selectedUser, setSelectedUser] = useState<PortalUser | null>(null)
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 
   const filteredUsers = users.filter(
     (u) =>
@@ -55,7 +48,6 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
       u.email.toLowerCase().includes(search.toLowerCase())
   )
 
-<<<<<<< HEAD
   async function handleDelete() {
     if (!selectedUser) return
     setIsUpdating(true)
@@ -66,10 +58,11 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
     } finally {
       setIsUpdating(false)
       setDeleteDialog(false)
+      setSelectedUser(null)
     }
   }
 
-  async function handleRoleChange(newRole: "Admin" | "Chef") {
+  async function handleRoleChange(newRole: PortalUser["role"]) {
     if (!selectedUser) return
     setIsUpdating(true)
     try {
@@ -81,22 +74,15 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
 
       if (!response.ok) throw new Error("Failed to update role")
 
-      setUsers(users.map(u => u.id === selectedUser.id ? { ...u, role: newRole } : u))
+      setUsers(users.map((u) => (u.id === selectedUser.id ? { ...u, role: newRole } : u)))
       toast.success(`Role for ${selectedUser.name} updated to ${newRole}`)
     } catch (error) {
       toast.error("Could not update role")
     } finally {
       setIsUpdating(false)
       setRoleDialog(false)
+      setSelectedUser(null)
     }
-=======
-  function handleDelete() {
-    if (selectedUser) {
-      setUsers(users.filter((u) => u.id !== selectedUser.id))
-      toast.success(`User ${selectedUser.name} removed from the list`)
-    }
-    setDeleteDialog(false)
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   }
 
   return (
@@ -133,15 +119,14 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
               </thead>
               <tbody>
                 {filteredUsers.map((user) => (
-<<<<<<< HEAD
                   <tr key={user.id} className="border-b border-border last:border-0 hover:bg-muted/50 transition-colors">
-=======
-                  <tr key={user.id} className="border-b border-border last:border-0">
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
                     <td className="py-3 font-medium text-foreground">{user.name}</td>
                     <td className="py-3 text-muted-foreground">{user.email}</td>
                     <td className="py-3">
-                      <Badge variant={user.role === "Admin" ? "default" : "secondary"} className={user.role === "Admin" ? "bg-primary text-primary-foreground" : ""}>
+                      <Badge
+                        variant={user.role === "Admin" ? "default" : user.role === "Chef" ? "secondary" : "outline"}
+                        className={user.role === "Admin" ? "bg-primary text-primary-foreground" : ""}
+                      >
                         {user.role}
                       </Badge>
                     </td>
@@ -160,7 +145,6 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-<<<<<<< HEAD
                           <DropdownMenuItem 
                             className="gap-2 cursor-pointer"
                             onClick={() => {
@@ -168,22 +152,11 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
                               setRoleDialog(true)
                             }}
                           >
-=======
-                          <DropdownMenuItem className="gap-2">
-                            <Pencil className="h-3.5 w-3.5" />
-                            Edit
-                          </DropdownMenuItem>
-                          <DropdownMenuItem className="gap-2">
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
                             <Shield className="h-3.5 w-3.5" />
                             Change Role
                           </DropdownMenuItem>
                           <DropdownMenuItem
-<<<<<<< HEAD
                             className="gap-2 text-destructive focus:text-destructive cursor-pointer"
-=======
-                            className="gap-2 text-destructive focus:text-destructive"
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
                             onClick={() => {
                               setSelectedUser(user)
                               setDeleteDialog(true)
@@ -203,7 +176,6 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
         </CardContent>
       </Card>
 
-<<<<<<< HEAD
       {/* Role Dialog */}
       <Dialog open={roleDialog} onOpenChange={setRoleDialog}>
         <DialogContent className="sm:max-w-md">
@@ -214,7 +186,7 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-3 py-4">
-            {(["Admin", "Chef"] as const).map((role) => (
+            {(["User", "Chef", "Admin"] as const).map((role) => (
               <Button
                 key={role}
                 variant={selectedUser?.role === role ? "default" : "outline"}
@@ -222,12 +194,20 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
                 onClick={() => handleRoleChange(role)}
                 disabled={isUpdating}
               >
-                <Shield className={cn("h-4 w-4", selectedUser?.role === role ? "text-primary-foreground" : "text-muted-foreground")} />
+                <Shield
+                  className={cn(
+                    "h-4 w-4",
+                    selectedUser?.role === role ? "text-primary-foreground" : "text-muted-foreground"
+                  )}
+                />
                 <div className="text-left">
                   <p className="font-medium">{role}</p>
                   <p className="text-[10px] text-muted-foreground">
-                    {role === "Admin" ? "Full access to management" : 
-                     "Can create and manage recipes"}
+                    {role === "Admin"
+                      ? "Full access to management"
+                      : role === "Chef"
+                      ? "Can create and manage recipes"
+                      : "Standard user access"}
                   </p>
                 </div>
               </Button>
@@ -240,8 +220,6 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
       </Dialog>
 
       {/* Delete Dialog */}
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
       <Dialog open={deleteDialog} onOpenChange={setDeleteDialog}>
         <DialogContent>
           <DialogHeader>
@@ -251,23 +229,13 @@ export function UsersPageClient({ initialUsers }: { initialUsers: PortalUser[] }
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-<<<<<<< HEAD
             <Button variant="ghost" onClick={() => setDeleteDialog(false)} disabled={isUpdating}>Cancel</Button>
             <Button variant="destructive" onClick={handleDelete} disabled={isUpdating}>
               {isUpdating ? "Deleting..." : "Delete User"}
             </Button>
-=======
-            <Button variant="ghost" onClick={() => setDeleteDialog(false)}>Cancel</Button>
-            <Button variant="destructive" onClick={handleDelete}>Delete User</Button>
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
           </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
   )
 }
-<<<<<<< HEAD
-
-import { cn } from "@/lib/utils"
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7

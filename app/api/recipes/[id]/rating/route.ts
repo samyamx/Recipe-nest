@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
 import { revalidatePath } from "next/cache"
 import { addRecipeRating } from "@/lib/recipe-store"
-<<<<<<< HEAD
 import { getCurrentUser } from "@/lib/auth"
 
 export async function POST(request: Request, context: { params: Promise<{ id: string }> }) {
@@ -9,10 +8,6 @@ export async function POST(request: Request, context: { params: Promise<{ id: st
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
-=======
-
-export async function POST(request: Request, context: { params: Promise<{ id: string }> }) {
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   const { id } = await context.params
   const body = (await request.json()) as { rating?: number }
   const rating = Number(body.rating)

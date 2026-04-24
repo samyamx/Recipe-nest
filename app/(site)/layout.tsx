@@ -13,11 +13,7 @@ export default async function SiteLayout({
     <div className="flex min-h-screen flex-col">
       <Navbar user={user} />
       <main className="flex-1">{children}</main>
-<<<<<<< HEAD
       <Footer user={user} />
-=======
-      <Footer />
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
     </div>
   )
 }

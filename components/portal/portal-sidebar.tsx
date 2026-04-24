@@ -20,10 +20,7 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/comp
 
 const navItems = [
   { href: "/portal", label: "Dashboard", icon: LayoutDashboard },
-<<<<<<< HEAD
   { href: "/portal/recipes", label: "Recipes", icon: ChefHat },
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   { href: "/portal/add-recipe", label: "Add Recipe", icon: PlusCircle },
   { href: "/portal/categories", label: "Categories", icon: FolderOpen },
   { href: "/portal/users", label: "Users", icon: Users },
@@ -31,26 +28,17 @@ const navItems = [
   { href: "/portal/settings", label: "Settings", icon: Settings },
 ]
 
-<<<<<<< HEAD
-export function PortalSidebar({ userName, userRole }: { userName: string, userRole?: string }) {
-=======
-export function PortalSidebar({ userName }: { userName: string }) {
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
+export function PortalSidebar({ userName, userRole }: { userName: string; userRole: "Admin" | "Chef" }) {
   const pathname = usePathname()
   const router = useRouter()
   const [collapsed, setCollapsed] = useState(false)
 
-<<<<<<< HEAD
-  const filteredNavItems = navItems.filter(item => {
+  const filteredNavItems = navItems.filter((item) => {
     if (userRole === "Chef") {
-      // Chefs cannot see Users or Analytics
       return !["Users", "Analytics"].includes(item.label)
     }
-    return true // Admins see everything
+    return true
   })
-
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   async function handleLogout() {
     await fetch("/api/auth/signout", {
       method: "POST",
@@ -75,11 +63,9 @@ export function PortalSidebar({ userName }: { userName: string }) {
             </div>
             {!collapsed && (
               <div className="min-w-0">
-<<<<<<< HEAD
-                <span className="font-serif text-lg text-sidebar-foreground whitespace-nowrap">Admin Portal</span>
-=======
-                <span className="font-serif text-lg text-sidebar-foreground whitespace-nowrap">ChefPortal</span>
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
+                <span className="font-serif text-lg text-sidebar-foreground whitespace-nowrap">
+                  {userRole === "Admin" ? "Admin Portal" : "Chef Portal"}
+                </span>
                 <p className="truncate text-xs text-sidebar-foreground/60">{userName}</p>
               </div>
             )}
@@ -89,11 +75,7 @@ export function PortalSidebar({ userName }: { userName: string }) {
         {/* Navigation */}
         <nav className="flex-1 p-3" aria-label="Portal navigation">
           <ul className="flex flex-col gap-1">
-<<<<<<< HEAD
             {filteredNavItems.map((item) => {
-=======
-            {navItems.map((item) => {
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
               const isActive = item.href === "/portal" ? pathname === "/portal" : pathname.startsWith(item.href)
               return (
                 <li key={item.href}>

@@ -1,10 +1,7 @@
 "use client"
 
 import { useState } from "react"
-<<<<<<< HEAD
 import { useRouter } from "next/navigation"
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 import { Bookmark, Printer, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
@@ -16,10 +13,7 @@ type RecipeDetailClientProps = {
 }
 
 export function RecipeDetailClient({ mode, recipe }: RecipeDetailClientProps) {
-<<<<<<< HEAD
   const router = useRouter()
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   const [isBookmarked, setIsBookmarked] = useState(recipe.bookmarked)
   const [userRating, setUserRating] = useState(0)
   const [ratingSummary, setRatingSummary] = useState({
@@ -36,7 +30,6 @@ export function RecipeDetailClient({ mode, recipe }: RecipeDetailClientProps) {
       body: JSON.stringify({ bookmarked: !isBookmarked }),
     })
 
-<<<<<<< HEAD
     if (response.status === 401) {
       toast.info("Please sign in to save recipes", {
         description: "Redirecting you to the login page...",
@@ -44,9 +37,6 @@ export function RecipeDetailClient({ mode, recipe }: RecipeDetailClientProps) {
       router.push("/login?next=" + encodeURIComponent(`/recipe/${recipe.id}`))
       return
     }
-
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
     if (!response.ok) {
       toast.error("Unable to update bookmark right now.")
       return
@@ -66,7 +56,6 @@ export function RecipeDetailClient({ mode, recipe }: RecipeDetailClientProps) {
       body: JSON.stringify({ rating: value }),
     })
 
-<<<<<<< HEAD
     if (response.status === 401) {
       toast.info("Please sign in to rate recipes", {
         description: "Redirecting you to the login page...",
@@ -74,9 +63,6 @@ export function RecipeDetailClient({ mode, recipe }: RecipeDetailClientProps) {
       router.push("/login?next=" + encodeURIComponent(`/recipe/${recipe.id}`))
       return
     }
-
-=======
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
     if (!response.ok) {
       toast.error("Unable to submit rating right now.")
       return

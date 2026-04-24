@@ -71,11 +71,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ recipe }, { status: 201 })
   } catch (error) {
     console.error(error)
-<<<<<<< HEAD
     const message = error instanceof Error ? error.message : "Unable to publish recipe right now."
     return NextResponse.json({ error: message }, { status: 500 })
-=======
-    return NextResponse.json({ error: "Unable to publish recipe right now." }, { status: 500 })
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   }
 }

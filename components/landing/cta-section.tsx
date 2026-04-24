@@ -1,14 +1,9 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-<<<<<<< HEAD
 import type { AppUser } from "@/lib/auth"
 
 export function CtaSection({ user }: { user: AppUser | null }) {
-=======
-
-export function CtaSection() {
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   return (
     <section className="py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
@@ -20,15 +15,9 @@ export function CtaSection() {
             Join our community of food enthusiasts. Upload your recipes, inspire others, and discover new flavors from around the world.
           </p>
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-<<<<<<< HEAD
             <Link href={user ? "/add-recipe" : "/login"}>
               <Button size="lg" className="rounded-xl bg-card text-card-foreground hover:bg-card/90 gap-2">
                 {user ? "Share a Recipe" : "Get Started Free"}
-=======
-            <Link href="/login">
-              <Button size="lg" className="rounded-xl bg-card text-card-foreground hover:bg-card/90 gap-2">
-                Get Started Free
->>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
