@@ -232,6 +232,7 @@ export const recipes: Recipe[] = [
     ],
     createdAt: "2026-02-15",
   },
+<<<<<<< HEAD
   {
     id: "7",
     title: "Quinoa Harvest Salad",
@@ -616,6 +617,8 @@ export const recipes: Recipe[] = [
     ],
     createdAt: "2026-04-19",
   }
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 ]
 
 export const dashboardStats = {

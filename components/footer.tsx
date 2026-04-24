@@ -1,8 +1,13 @@
 import Link from "next/link"
 import { ChefHat } from "lucide-react"
+<<<<<<< HEAD
 import type { AppUser } from "@/lib/auth"
 
 export function Footer({ user }: { user: AppUser | null }) {
+=======
+
+export function Footer() {
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   return (
     <footer className="border-t border-border bg-card">
       <div className="mx-auto max-w-7xl px-4 py-12 lg:px-8">
@@ -31,9 +36,13 @@ export function Footer({ user }: { user: AppUser | null }) {
             <ul className="mt-3 flex flex-col gap-2">
               <li><Link href="/add-recipe" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Share a Recipe</Link></li>
               <li><Link href="/profile" className="text-sm text-muted-foreground hover:text-foreground transition-colors">My Profile</Link></li>
+<<<<<<< HEAD
               {user?.role === "Admin" && (
                 <li><Link href="/portal" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Admin Portal</Link></li>
               )}
+=======
+              <li><Link href="/portal" className="text-sm text-muted-foreground hover:text-foreground transition-colors">ChefPortal</Link></li>
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
             </ul>
           </div>
           <div>

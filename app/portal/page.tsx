@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { UtensilsCrossed, Users, Star, TrendingUp, Eye, UserPlus } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getPortalDashboardData } from "@/lib/recipe-store"
@@ -27,6 +28,34 @@ export default async function PortalDashboard() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+=======
+"use client"
+
+import { UtensilsCrossed, Users, Star, TrendingUp, Eye, UserPlus } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { dashboardStats, monthlyData, recipes } from "@/lib/data"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, LineChart, Line } from "recharts"
+
+const statCards = [
+  { label: "Total Recipes", value: dashboardStats.totalRecipes.toLocaleString(), icon: UtensilsCrossed, change: "+12%" },
+  { label: "Total Users", value: dashboardStats.totalUsers.toLocaleString(), icon: Users, change: "+8%" },
+  { label: "Avg Rating", value: dashboardStats.avgRating.toString(), icon: Star, change: "+0.2" },
+  { label: "Monthly Visits", value: (dashboardStats.monthlyVisits / 1000).toFixed(1) + "k", icon: Eye, change: "+15%" },
+  { label: "Total Reviews", value: (dashboardStats.totalReviews / 1000).toFixed(1) + "k", icon: TrendingUp, change: "+22%" },
+  { label: "New Users", value: dashboardStats.newUsersThisMonth.toString(), icon: UserPlus, change: "+5%" },
+]
+
+export default function PortalDashboard() {
+  return (
+    <div>
+      <div>
+        <h1 className="font-serif text-2xl text-foreground lg:text-3xl">Dashboard</h1>
+        <p className="mt-1 text-sm text-muted-foreground">Welcome back. Here is what is happening with Recipe Nest.</p>
+      </div>
+
+      {/* KPI Cards */}
+      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
         {statCards.map((stat) => (
           <Card key={stat.label} className="border-border">
             <CardContent className="p-5">
@@ -45,6 +74,7 @@ export default async function PortalDashboard() {
         ))}
       </div>
 
+<<<<<<< HEAD
       {/* Charts (Client Component) */}
       <DashboardCharts monthlyData={monthlyData} />
 
@@ -58,6 +88,73 @@ export default async function PortalDashboard() {
             <table className="w-full text-sm text-left">
               <thead>
                 <tr className="border-b border-border">
+=======
+      {/* Charts */}
+      <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="text-base font-medium text-foreground">New Recipes Per Month</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
+                  <XAxis dataKey="month" className="text-xs fill-muted-foreground" tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                  <YAxis className="text-xs fill-muted-foreground" tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'hsl(var(--card))',
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px',
+                      color: 'hsl(var(--foreground))',
+                    }}
+                  />
+                  <Bar dataKey="recipes" fill="oklch(0.55 0.15 45)" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border">
+          <CardHeader>
+            <CardTitle className="text-base font-medium text-foreground">Monthly Page Views</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={monthlyData}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
+                  <XAxis dataKey="month" className="text-xs fill-muted-foreground" tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                  <YAxis className="text-xs fill-muted-foreground" tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'hsl(var(--card))',
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px',
+                      color: 'hsl(var(--foreground))',
+                    }}
+                  />
+                  <Line type="monotone" dataKey="views" stroke="oklch(0.70 0.14 55)" strokeWidth={2} dot={{ fill: 'oklch(0.70 0.14 55)' }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Recent Recipes */}
+      <Card className="mt-8 border-border">
+        <CardHeader>
+          <CardTitle className="text-base font-medium text-foreground">Recent Recipes</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border text-left">
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
                   <th className="pb-3 font-medium text-muted-foreground">Title</th>
                   <th className="pb-3 font-medium text-muted-foreground">Category</th>
                   <th className="pb-3 font-medium text-muted-foreground">Author</th>
@@ -66,8 +163,13 @@ export default async function PortalDashboard() {
                 </tr>
               </thead>
               <tbody>
+<<<<<<< HEAD
                 {recentRecipes.map((recipe) => (
                   <tr key={recipe.id} className="border-b border-border last:border-0 hover:bg-muted/50 transition-colors">
+=======
+                {recipes.map((recipe) => (
+                  <tr key={recipe.id} className="border-b border-border last:border-0">
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
                     <td className="py-3 font-medium text-foreground">{recipe.title}</td>
                     <td className="py-3 text-muted-foreground">{recipe.category}</td>
                     <td className="py-3 text-muted-foreground">{recipe.author}</td>
@@ -80,11 +182,14 @@ export default async function PortalDashboard() {
                     <td className="py-3 text-muted-foreground">{recipe.createdAt}</td>
                   </tr>
                 ))}
+<<<<<<< HEAD
                 {recentRecipes.length === 0 && (
                   <tr>
                     <td colSpan={5} className="py-8 text-center text-muted-foreground">No recent recipes found.</td>
                   </tr>
                 )}
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
               </tbody>
             </table>
           </div>

@@ -4,7 +4,10 @@ import { categories as seedCategories, recipes as seedRecipes, type Recipe } fro
 import { getDatabaseSafely } from "@/lib/mongodb"
 
 const recipesCollectionName = "recipes"
+<<<<<<< HEAD
 const categoriesCollectionName = "categories"
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 let fallbackRecipes = seedRecipes.map((recipe) => normalizeRecipe(recipe))
 
 type RecipeFilters = {
@@ -71,11 +74,14 @@ async function getRecipesCollection() {
   return db?.collection<RecipeDocument>(recipesCollectionName) ?? null
 }
 
+<<<<<<< HEAD
 async function getCategoriesCollection() {
   const db = await getDatabaseSafely()
   return db?.collection<{ name: string }>(categoriesCollectionName) ?? null
 }
 
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 async function ensureSeedData() {
   const collection = await getRecipesCollection()
 
@@ -171,6 +177,7 @@ export async function createRecipe(input: CreateRecipeInput) {
   return nextRecipe
 }
 
+<<<<<<< HEAD
 export async function updateRecipe(id: string, input: Partial<CreateRecipeInput>) {
   const collection = await ensureSeedData()
 
@@ -230,6 +237,8 @@ export async function deleteRecipe(id: string) {
   return result.deletedCount > 0
 }
 
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 export async function updateRecipeBookmark(id: string, bookmarked?: boolean) {
   const collection = await ensureSeedData()
 
@@ -314,6 +323,7 @@ export async function getCategoryStats() {
     return acc
   }, {})
 
+<<<<<<< HEAD
   // Include seed categories and any custom categories stored in DB
   const categoriesCol = await getCategoriesCollection()
   let customCategories: string[] = []
@@ -328,6 +338,14 @@ export async function getCategoryStats() {
     name: category,
     count: counts[category] ?? 0,
   }))
+=======
+  return seedCategories
+    .filter((category) => category !== "All")
+    .map((category) => ({
+      name: category,
+      count: counts[category] ?? 0,
+    }))
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 }
 
 export async function getHomeStats() {
@@ -346,6 +364,7 @@ export async function getHomeStats() {
   }
 }
 
+<<<<<<< HEAD
 import { getTotalUsers, getNewUsersThisMonth } from "@/lib/auth"
 
 export async function getPortalDashboardData() {
@@ -395,10 +414,13 @@ export async function getPortalDashboardData() {
   }
 }
 
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 export async function getSiteCategories() {
   const stats = await getCategoryStats()
   return ["All", ...stats.map((category) => category.name)]
 }
+<<<<<<< HEAD
 
 export async function addSiteCategory(name: string) {
   const col = await getCategoriesCollection()
@@ -438,3 +460,5 @@ export async function deleteSiteCategory(name: string, replacement = 'All') {
   }
   return { deleted: true }
 }
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7

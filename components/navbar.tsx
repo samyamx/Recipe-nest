@@ -5,15 +5,23 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Menu, X, Search, ChefHat, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
+<<<<<<< HEAD
 import { toast } from "sonner"
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 import { cn } from "@/lib/utils"
 import type { AppUser } from "@/lib/auth"
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/explore", label: "Explore" },
+<<<<<<< HEAD
   { href: "/add-recipe", label: "Add Recipe", protected: true },
   { href: "/profile", label: "Profile", protected: true },
+=======
+  { href: "/add-recipe", label: "Add Recipe" },
+  { href: "/profile", label: "Profile" },
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 ]
 
 export function Navbar({ user }: { user: AppUser | null }) {
@@ -21,6 +29,7 @@ export function Navbar({ user }: { user: AppUser | null }) {
   const router = useRouter()
   const [mobileOpen, setMobileOpen] = useState(false)
 
+<<<<<<< HEAD
   function handleLinkClick(e: React.MouseEvent, href: string, isProtected?: boolean) {
     if (isProtected && !user) {
       e.preventDefault()
@@ -33,6 +42,8 @@ export function Navbar({ user }: { user: AppUser | null }) {
     setMobileOpen(false)
   }
 
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   async function handleLogout() {
     await fetch("/api/auth/signout", {
       method: "POST",
@@ -57,7 +68,10 @@ export function Navbar({ user }: { user: AppUser | null }) {
             <Link
               key={link.href}
               href={link.href}
+<<<<<<< HEAD
               onClick={(e) => handleLinkClick(e, link.href, (link as any).protected)}
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
               className={cn(
                 "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                 pathname === link.href
@@ -92,6 +106,7 @@ export function Navbar({ user }: { user: AppUser | null }) {
               </Button>
             </Link>
           )}
+<<<<<<< HEAD
           {user?.role === "Admin" && (
             <Link href="/portal">
               <Button size="sm" className="hidden md:flex bg-primary text-primary-foreground hover:bg-primary/90">
@@ -99,6 +114,13 @@ export function Navbar({ user }: { user: AppUser | null }) {
               </Button>
             </Link>
           )}
+=======
+          <Link href="/portal">
+            <Button size="sm" className="hidden md:flex bg-primary text-primary-foreground hover:bg-primary/90">
+              ChefPortal
+            </Button>
+          </Link>
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
           <Button
             variant="ghost"
             size="icon"
@@ -118,7 +140,11 @@ export function Navbar({ user }: { user: AppUser | null }) {
               <Link
                 key={link.href}
                 href={link.href}
+<<<<<<< HEAD
                 onClick={(e) => handleLinkClick(e, link.href, (link as any).protected)}
+=======
+                onClick={() => setMobileOpen(false)}
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
                 className={cn(
                   "rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                   pathname === link.href
@@ -142,11 +168,17 @@ export function Navbar({ user }: { user: AppUser | null }) {
                   <Button variant="outline" className="w-full">Sign In</Button>
                 </Link>
               )}
+<<<<<<< HEAD
               {user?.role === "Admin" && (
                 <Link href="/portal" onClick={() => setMobileOpen(false)}>
                   <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Admin Portal</Button>
                 </Link>
               )}
+=======
+              <Link href="/portal" onClick={() => setMobileOpen(false)}>
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">ChefPortal</Button>
+              </Link>
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
             </div>
           </nav>
         </div>

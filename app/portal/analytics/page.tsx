@@ -1,8 +1,13 @@
 "use client"
 
+<<<<<<< HEAD
 import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { monthlyData, dashboardStats } from "@/lib/data"
+=======
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { monthlyData, categoryStats, dashboardStats } from "@/lib/data"
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 import {
   AreaChart,
   Area,
@@ -30,6 +35,7 @@ const PIE_COLORS = [
   "oklch(0.50 0.12 60)",
 ]
 
+<<<<<<< HEAD
 const topDefault = [] as { name: string; count: number }[]
 
 export default function AnalyticsPage() {
@@ -60,6 +66,20 @@ export default function AnalyticsPage() {
     { month: "Feb", bookmarks: 720, reviews: 350, shares: 220 },
   ]
 
+=======
+const topCategories = categoryStats.slice(0, 6)
+
+const engagementData = [
+  { month: "Sep", bookmarks: 420, reviews: 180, shares: 95 },
+  { month: "Oct", bookmarks: 510, reviews: 220, shares: 130 },
+  { month: "Nov", bookmarks: 480, reviews: 195, shares: 110 },
+  { month: "Dec", bookmarks: 640, reviews: 310, shares: 190 },
+  { month: "Jan", bookmarks: 590, reviews: 280, shares: 170 },
+  { month: "Feb", bookmarks: 720, reviews: 350, shares: 220 },
+]
+
+export default function AnalyticsPage() {
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   return (
     <div>
       <div>

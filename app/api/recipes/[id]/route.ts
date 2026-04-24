@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server"
+<<<<<<< HEAD
 import { getRecipeById, updateRecipe, deleteRecipe } from "@/lib/recipe-store"
+=======
+import { getRecipeById } from "@/lib/recipe-store"
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 
 export async function GET(_: Request, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params
@@ -11,6 +15,7 @@ export async function GET(_: Request, context: { params: Promise<{ id: string }>
 
   return NextResponse.json({ recipe })
 }
+<<<<<<< HEAD
 
 export async function PUT(request: Request, context: { params: Promise<{ id: string }> }) {
   try {
@@ -44,3 +49,5 @@ export async function DELETE(_: Request, context: { params: Promise<{ id: string
     return NextResponse.json({ error: "Failed to delete recipe." }, { status: 500 })
   }
 }
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7

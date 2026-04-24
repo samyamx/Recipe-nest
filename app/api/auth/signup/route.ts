@@ -21,7 +21,10 @@ export async function POST(request: Request) {
       email: body.email,
       name: body.name,
       password: body.password,
+<<<<<<< HEAD
       role: body.role as any,
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
     })
 
     await createSession(user.id)

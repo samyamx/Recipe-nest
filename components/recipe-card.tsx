@@ -3,14 +3,20 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+<<<<<<< HEAD
 import { useRouter } from "next/navigation"
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 import { Clock, Bookmark, Star, Users } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import type { Recipe } from "@/lib/data"
 import { toast } from "sonner"
 
 export function RecipeCard({ recipe }: { recipe: Recipe }) {
+<<<<<<< HEAD
   const router = useRouter()
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   const [isBookmarked, setIsBookmarked] = useState(recipe.bookmarked)
 
   async function toggleBookmark(e: React.MouseEvent<HTMLButtonElement>) {
@@ -25,6 +31,7 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
       body: JSON.stringify({ bookmarked: !isBookmarked }),
     })
 
+<<<<<<< HEAD
     if (response.status === 401) {
       toast.info("Please sign in to save recipes", {
         description: "Redirecting you to the login page...",
@@ -33,6 +40,8 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
       return
     }
 
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
     if (!response.ok) {
       toast.error("Unable to update bookmark right now.")
       return

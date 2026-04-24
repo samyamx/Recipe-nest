@@ -38,8 +38,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
+<<<<<<< HEAD
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased" suppressHydrationWarning>
+=======
+    <html lang="en">
+      <body className="font-sans antialiased">
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
         {children}
         <Toaster position="bottom-right" richColors />
         <Analytics />

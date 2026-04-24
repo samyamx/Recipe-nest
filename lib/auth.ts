@@ -2,7 +2,11 @@ import "server-only"
 
 import crypto from "crypto"
 import { cookies } from "next/headers"
+<<<<<<< HEAD
 import { getDatabase, getDatabaseSafely } from "@/lib/mongodb"
+=======
+import { getDatabase } from "@/lib/mongodb"
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 
 const usersCollectionName = "users"
 const sessionsCollectionName = "sessions"
@@ -15,7 +19,11 @@ export type AppUser = {
   id: string
   location?: string
   name: string
+<<<<<<< HEAD
   role: "Admin" | "Chef"
+=======
+  role: "Admin" | "Chef" | "User"
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   status: "Active" | "Inactive"
 }
 
@@ -67,6 +75,7 @@ function sanitizeUser(user: UserDocument): AppUser {
 }
 
 async function getUsersCollection() {
+<<<<<<< HEAD
   const db = await getDatabaseSafely()
   return db?.collection<UserDocument>(usersCollectionName) ?? null
 }
@@ -74,6 +83,15 @@ async function getUsersCollection() {
 async function getSessionsCollection() {
   const db = await getDatabaseSafely()
   return db?.collection<SessionDocument>(sessionsCollectionName) ?? null
+=======
+  const db = await getDatabase()
+  return db.collection<UserDocument>(usersCollectionName)
+}
+
+async function getSessionsCollection() {
+  const db = await getDatabase()
+  return db.collection<SessionDocument>(sessionsCollectionName)
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 }
 
 async function setSessionCookie(token: string, expiresAt: Date) {
@@ -92,11 +110,16 @@ export async function clearSessionCookie() {
   cookieStore.delete(sessionCookieName)
 }
 
+<<<<<<< HEAD
 export async function signUpUser(input: { email: string; name: string; password: string; role?: AppUser["role"] }) {
   const usersCollection = await getUsersCollection()
   if (!usersCollection) {
     throw new Error("Database is unavailable.")
   }
+=======
+export async function signUpUser(input: { email: string; name: string; password: string }) {
+  const usersCollection = await getUsersCollection()
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 
   const normalizedEmail = input.email.trim().toLowerCase()
   const existingUser = await usersCollection.findOne({ email: normalizedEmail })
@@ -105,9 +128,12 @@ export async function signUpUser(input: { email: string; name: string; password:
     throw new Error("An account with this email already exists.")
   }
 
+<<<<<<< HEAD
   const userCount = await usersCollection.countDocuments()
   const assignedRole: AppUser["role"] = input.role === "Admin" ? "Admin" : "Chef"
 
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
   const user: UserDocument = {
     bio: "",
     createdAt: new Date().toISOString(),
@@ -116,7 +142,11 @@ export async function signUpUser(input: { email: string; name: string; password:
     location: "",
     name: input.name.trim(),
     passwordHash: hashPassword(input.password),
+<<<<<<< HEAD
     role: userCount === 0 ? "Admin" : assignedRole,
+=======
+    role: "Chef",
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
     status: "Active",
   }
 
@@ -124,6 +154,7 @@ export async function signUpUser(input: { email: string; name: string; password:
   return sanitizeUser(user)
 }
 
+<<<<<<< HEAD
 export async function updateUserRole(userId: string, role: AppUser["role"]) {
   const usersCollection = await getUsersCollection()
   if (!usersCollection) return null
@@ -137,6 +168,8 @@ export async function updateUserRole(userId: string, role: AppUser["role"]) {
   return updated ? sanitizeUser(updated) : null
 }
 
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 export async function updateCurrentUserProfile(input: { bio: string; location: string; name: string; userId: string }) {
   const usersCollection = await getUsersCollection()
 
@@ -260,6 +293,7 @@ export async function listUsersWithRecipeCounts() {
 
   return enriched.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
 }
+<<<<<<< HEAD
 
 export async function getTotalUsers() {
   const usersCollection = await getUsersCollection()
@@ -278,3 +312,5 @@ export async function getNewUsersThisMonth() {
     createdAt: { $gte: firstDayOfMonth.toISOString() }
   })
 }
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7

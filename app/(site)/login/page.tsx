@@ -8,7 +8,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
+<<<<<<< HEAD
 import { cn } from "@/lib/utils"
+=======
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
 
 export default function LoginPage() {
   const router = useRouter()
@@ -72,8 +75,12 @@ export default function LoginPage() {
       }
 
       toast.success(isRegister ? "Account created successfully!" : "Signed in successfully!")
+<<<<<<< HEAD
       const nextPath = searchParams.get("next") || (email === "admin@gmail.com" ? "/portal" : "/")
       router.push(nextPath)
+=======
+      router.push(searchParams.get("next") || "/portal")
+>>>>>>> 8c952ef0f8387dbc279f946f4559881fc5e45ea7
       router.refresh()
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Authentication failed.")
